@@ -1,7 +1,7 @@
 defmodule Glcsrd.CLI do
   def run do
-    IO.puts "HELLO"
-    readings = :ets.new(:readings, [:set])
+    # IO.puts "HELLO"
+    # readings = :ets.new(:readings, [:set])
     
     File.stream!("glcsrd.txt")
     |> Stream.map(&String.replace(&1, "\n", ""))
@@ -9,14 +9,22 @@ defmodule Glcsrd.CLI do
     |> Enum.map(&String.split(&1, ","))
     #|> Enum.map(&{&1})
     |> IO.inspect
-    |> Enum.each(&process(&1, readings))
+    |> Enum.map(&process(&1))
+    |> IO.inspect
 
-    rd_list = :ets.foldr(fn(x, list) -> [x | list] end, [], readings)
-    IO.inspect rd_list
+    # |> Enum.each(&process(&1, readings))
+
+    # rd_list = :ets.foldr(fn(x, list) -> [x | list] end, [], readings)
+    # IO.inspect rd_list
+  end
+
+  def process(line) do
+    [date, time, value] = Enum.map(line, &String.trim(&1))
+    {date, time, value}
   end
 
   def process(line, readings) do
-    [date, time, value] = line
+    [date, time, value] = Enum.map(line, &String.trim(&1))
     IO.puts("Date: #{date} #{time} #{value}")
     [month, day, year] = String.split(date, "/")
     key = "#{year}-#{month}-#{day}-#{String.trim(time)}"
