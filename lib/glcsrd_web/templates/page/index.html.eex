@@ -12,6 +12,9 @@
   </div>
   <ul id=show-data></ul>
 
+  <canvas id="myLineCxt" width="200" height="200"></canvas>
+  <canvas id="myChart" width="400" height="400"></canvas>
+
 <div class="row marketing">
   <div class="col-lg-6">
     <h4>Resources</h4>
