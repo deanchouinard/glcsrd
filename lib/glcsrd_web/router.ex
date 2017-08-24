@@ -20,7 +20,9 @@ defmodule GlcsrdWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", GlcsrdWeb do
-  #   pipe_through :api
-  # end
+   scope "/api", GlcsrdWeb do
+     pipe_through :api
+
+     get "/readings", ApiController, :show
+   end
 end

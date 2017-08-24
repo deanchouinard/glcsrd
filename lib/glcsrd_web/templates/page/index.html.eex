@@ -8,11 +8,12 @@
 <% end %>
 </ul>
 <div id="reading-data" data-readings="<%= display_readings(@readings) %>">
+
 <!-- ... -->
   </div>
   <ul id=show-data></ul>
 
-  <canvas id="myLineCxt" width="200" height="200"></canvas>
+  <canvas id="myLineCxt" width="200" height="100"></canvas>
   <canvas id="myChart" width="400" height="400"></canvas>
 
 <div class="row marketing">

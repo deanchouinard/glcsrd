@@ -3,25 +3,13 @@ defmodule Glcsrd.CLI do
     # IO.puts "HELLO"
     # readings = :ets.new(:readings, [:set])
     
-    File.stream!("glcsrd.txt")
-    |> Stream.map(&String.replace(&1, "\n", ""))
-    |> Stream.filter(fn(x) -> x != "" end)
-    |> Enum.map(&String.split(&1, ","))
-    #|> Enum.map(&{&1})
-    |> IO.inspect
-    |> Enum.map(&process(&1))
-    |> IO.inspect
-
+    Glcsrd.Readings.get()
     # |> Enum.each(&process(&1, readings))
 
     # rd_list = :ets.foldr(fn(x, list) -> [x | list] end, [], readings)
     # IO.inspect rd_list
   end
 
-  def process(line) do
-    [date, time, value] = Enum.map(line, &String.trim(&1))
-    {date, time, value}
-  end
 
   def process(line, readings) do
     [date, time, value] = Enum.map(line, &String.trim(&1))

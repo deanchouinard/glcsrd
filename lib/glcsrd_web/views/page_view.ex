@@ -2,7 +2,7 @@ defmodule GlcsrdWeb.PageView do
   use GlcsrdWeb, :view
 
   def show_reading(reading) do
-    {date, time, value} = reading
+    %{date: date, time: time, value: value} = reading
     "#{date} #{time} #{value}"
   end
 

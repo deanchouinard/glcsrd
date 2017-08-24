@@ -19,19 +19,25 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+import http_request from "./xml_http_request.js";
 import Chart from 'chart.js';
 var ctx = document.getElementById("myChart");
   // var Chart = require("chart.js");
 //import Chart from 'chart.js';
-var ctxLine = document.getElementById("myLineCxt");
-if (ctxLine) {
-    var myLineChart = new Chart(ctxLine, {
+function displayChart(xhttp) {
+  var list = JSON.parse(xhttp.responseText);
+  console.log(list);
+  for (var x in list.items) {
+
+  }
+
+  var myLineChart = new Chart(ctxLine, {
     type: 'line',
     data: {
         datasets: [{
-            data: [10, 20, 30, 40, 50, 60]
+            data: [110, 120, 130, 125, 105, 115]
         }],
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        labels: ['8/1', '8/2', '8/3', '8/4', '8/5', '8/6'],
     },
     options: {
         scales: {
@@ -43,7 +49,17 @@ if (ctxLine) {
         }
     }
   });
+  for (var x in list.items) {
+    $("#slist").append("<li>" + list.items[x] + "</li>");
+  }
+}
+
+var ctxLine = document.getElementById("myLineCxt");
+if (ctxLine) {
+  var cUrl = "/api/readings"
+  http_request.loadDoc(cUrl, displayChart);
 };
+
 
 if (ctx) {
   var myCart = new Chart(ctx, {
