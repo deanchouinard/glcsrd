@@ -25,21 +25,34 @@ var ctx = document.getElementById("myChart");
   // var Chart = require("chart.js");
 //import Chart from 'chart.js';
 function displayChart(xhttp) {
+  var values = [];
+  var dlabels = [];
   var list = JSON.parse(xhttp.responseText);
   console.log(list);
   for (var x in list.items) {
-
+    values.push(list.items[x].value);
+    var segments = list.items[x].date.split("/")
+    dlabels.push(segments[0] + "/" + segments[1]);
+    console.log(list.items[x].value);
+    console.log(x);
   }
 
   var myLineChart = new Chart(ctxLine, {
     type: 'line',
     data: {
         datasets: [{
-            data: [110, 120, 130, 125, 105, 115]
+            label: 'mg/dL',
+            //data: [110, 120, 130, 125, 105, 115]
+            data: values
         }],
-        labels: ['8/1', '8/2', '8/3', '8/4', '8/5', '8/6'],
+        //labels: ['8/1', '8/2', '8/3', '8/4', '8/5', '8/6'],
+        labels: dlabels,
     },
     options: {
+        title:{
+          display:true,
+          text:'Glucose Readings'
+        },
         scales: {
             xAxes: [{
                 ticks: {
@@ -49,9 +62,9 @@ function displayChart(xhttp) {
         }
     }
   });
-  for (var x in list.items) {
-    $("#slist").append("<li>" + list.items[x] + "</li>");
-  }
+  //for (var x in list.items) {
+    //$("#slist").append("<li>" + list.items[x] + "</li>");
+  //}
 }
 
 var ctxLine = document.getElementById("myLineCxt");
