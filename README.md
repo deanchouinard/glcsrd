@@ -1,5 +1,13 @@
 # Glcsrd
 
+  * blood glucose reading
+  * weight
+  * events
+
+## ToDo
+  * use sqlite3
+  * package into an executable
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

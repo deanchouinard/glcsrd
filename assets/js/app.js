@@ -42,8 +42,17 @@ function displayChart(xhttp) {
     data: {
         datasets: [{
             label: 'mg/dL',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+//            backgroundColor: window.chartColors.blue,
+  //          borderColor: window.chartColors.blue,
             //data: [110, 120, 130, 125, 105, 115]
             data: values
+        }, {
+          label: 'weight',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          fill: false,
+          data: [200, 201, 199, 198, 202]
         }],
         //labels: ['8/1', '8/2', '8/3', '8/4', '8/5', '8/6'],
         labels: dlabels,
