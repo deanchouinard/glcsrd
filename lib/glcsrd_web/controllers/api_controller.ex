@@ -3,7 +3,9 @@ defmodule GlcsrdWeb.ApiController do
 
   def show(conn, _params) do
 
-    json conn, %{items: Glcsrd.Readings.get()}
+    readings = Glcsrd.Readings.get()
+    rd_list = :ets.foldr(fn({_, x} = y, list) -> [x | list] end, [], readings)
+    json conn, %{items: rd_list}
   end
 
 end

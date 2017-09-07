@@ -14,7 +14,7 @@ defmodule Glcsrd.CLI do
   def process(line, readings) do
     [date, time, value] = Enum.map(line, &String.trim(&1))
     IO.puts("Date: #{date} #{time} #{value}")
-    [month, day, year] = String.split(date, "/")
+    [year, month, day] = String.split(date, "-")
     key = "#{year}-#{month}-#{day}-#{String.trim(time)}"
     IO.puts(key)
 

@@ -31,8 +31,8 @@ function displayChart(xhttp) {
   console.log(list);
   for (var x in list.items) {
     values.push(list.items[x].value);
-    var segments = list.items[x].date.split("/")
-    dlabels.push(segments[0] + "/" + segments[1]);
+    var segments = list.items[x].date.split("-")
+    dlabels.push(segments[1] + "/" + segments[2]);
     console.log(list.items[x].value);
     console.log(x);
   }
