@@ -26,16 +26,22 @@ var ctx = document.getElementById("myChart");
 //import Chart from 'chart.js';
 function displayChart(xhttp) {
   var values = [];
+  var weight_values = [];
   var dlabels = [];
   var list = JSON.parse(xhttp.responseText);
   console.log(list);
-  for (var x in list.items) {
-    values.push(list.items[x].value);
-    var segments = list.items[x].date.split("-")
+  console.log("after list");
+  for (var x in list.items.glucose) {
+    values.push(list.items.glucose[x].value);
+    var segments = list.items.glucose[x].date.split("-")
     dlabels.push(segments[1] + "/" + segments[2]);
-    console.log(list.items[x].value);
+    console.log(list.items.glucose[x].value);
     console.log(x);
   }
+  for (var x in list.items.weight) {
+    weight_values.push(list.items.weight[x].value);
+  }
+
 
   var myLineChart = new Chart(ctxLine, {
     type: 'line',
@@ -52,7 +58,8 @@ function displayChart(xhttp) {
           borderColor: 'rgba(54, 162, 235, 1)',
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           fill: false,
-          data: [200, 201, 199, 198, 202]
+          data: weight_values
+    //      data: [200, 201, 199, 198, 202]
         }],
         //labels: ['8/1', '8/2', '8/3', '8/4', '8/5', '8/6'],
         labels: dlabels,
