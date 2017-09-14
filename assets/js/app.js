@@ -67,7 +67,7 @@ function displayChart(xhttp) {
     options: {
         title:{
           display:true,
-          text:'Glucose Readings'
+          text:'Glucose Readings and Weight'
         },
         scales: {
             xAxes: [{

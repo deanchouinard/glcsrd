@@ -7,9 +7,28 @@ defmodule Glcsrd.Readings do
     IO.inspect(weight_readings, label: "weight_readings")
     r_diff = glucose_readings -- weight_readings
     IO.inspect(r_diff, label: "diff")
+    
+    # fill in missing weight dates with nil to sync indexes of both datasets
+    weight_readings = Enum.map(glucose_readings, &match_lists(&1,
+      weight_readings))
+
     { glucose_readings, weight_readings }
   end
   
+  defp match_lists(aitem, listb) do
+    found = Enum.find(listb, 0, &is_match(&1, aitem))
+    case found do
+      0 -> %{aitem | :value => nil}
+      _ -> found
+    end
+  end
+
+  defp is_match(a, b) do
+    %{date: adate, time: _, value: _} = a
+    %{date: bdate, time: _, value: _} = b
+    adate == bdate
+  end
+
   def read_files(file_spec) do
     files = Path.wildcard(file_spec)
     readings = for file <- files do
@@ -27,7 +46,7 @@ defmodule Glcsrd.Readings do
       # IO.inspect(readings, label: "readings_for")
     end
     readings = List.flatten(readings)
-    readings
+    #readings
 
   end
 
