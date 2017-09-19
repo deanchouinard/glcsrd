@@ -12,7 +12,7 @@ defmodule Glcsrd.Application do
       supervisor(GlcsrdWeb.Endpoint, []),
       # Start your own worker by calling: Glcsrd.Worker.start_link(arg1, arg2, arg3)
       # worker(Glcsrd.Worker, [arg1, arg2, arg3]),
-      worker(Glcsrd.Readings.Server, [name: GlcsrdData])
+      worker(Glcsrd.Readings.Server, [] )
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
