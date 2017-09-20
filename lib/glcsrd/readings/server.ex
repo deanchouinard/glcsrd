@@ -11,10 +11,13 @@ defmodule Glcsrd.Readings.Server do
     {:ok, state}
   end
 
-
   def handle_call(:get, _from, state) do
     {:reply, state, state}
   end
 
+  def handle_call(:reload, _from, state) do
+    state = Impl.load()
+    {:reply, state, state}
+  end
 end
 

@@ -24,5 +24,6 @@ defmodule GlcsrdWeb.Router do
      pipe_through :api
 
      get "/readings", ApiController, :show
+     get "/reload", ApiController, :reload
    end
 end

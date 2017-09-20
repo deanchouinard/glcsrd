@@ -89,6 +89,17 @@ if (ctxLine) {
   http_request.loadDoc(cUrl, displayChart);
 };
 
+var btns = document.getElementById("buttons");
+if (btns) {
+  var button = document.createElement("button");
+  button.innerHTML = "Reload Data"
+  btns.appendChild(button);
+  button.addEventListener ("click",
+    function() {
+      var cUrl = "/api/reload"
+      http_request.loadDoc(cUrl, displayChart);
+    });
+}
 
 if (ctx) {
   var myCart = new Chart(ctx, {

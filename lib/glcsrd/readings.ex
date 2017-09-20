@@ -5,5 +5,8 @@ defmodule Glcsrd.Readings do
     {glucose, weight} = GenServer.call(GlcsrdData, :get)
   end
 
+  def reload() do
+    {glucose, weight} = GenServer.call(GlcsrdData, :reload)
+  end
 end
 
