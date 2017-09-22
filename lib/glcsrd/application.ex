@@ -6,6 +6,9 @@ defmodule Glcsrd.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
+    g_config = Glcsrd.Config.read_config()
+    IO.inspect g_config
+
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
