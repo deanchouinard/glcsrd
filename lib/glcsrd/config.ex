@@ -1,7 +1,7 @@
-defmodule Config do
+defmodule Glcsrd.Config do
 
   def read_config do
-    File.stream!(Path.join(File.cwd!, "config.conf"))
+    File.stream!(Path.join(File.cwd!, "glcsrd.conf"))
     |> Stream.map(&String.replace(&1, "\n", ""))
     |> Stream.filter(&String.length(&1) > 0)
     |> Stream.filter(&String.at(&1, 0) != "#")
@@ -23,9 +23,9 @@ defmodule Config do
   end
 end
 
-c_data = Config.read_config()
-IO.inspect c_data
-data_dir = Config.get(c_data, "DataDir", "home/data")
-IO.inspect data_dir
-port = Config.get(c_data, "Port", 8000)
-IO.inspect port
+# c_data = Config.read_config()
+# IO.inspect c_data
+# data_dir = Config.get(c_data, "DataDir", "home/data")
+# IO.inspect data_dir
+# port = Config.get(c_data, "Port", 8000)
+# IO.inspect port

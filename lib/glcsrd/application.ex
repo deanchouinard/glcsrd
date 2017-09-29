@@ -6,7 +6,7 @@ defmodule Glcsrd.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
-    g_config = Glcsrd.Config.read_config()
+    [g_config] = Glcsrd.Config.read_config()
     IO.inspect g_config
 
     # Define workers and child supervisors to be supervised
@@ -15,7 +15,7 @@ defmodule Glcsrd.Application do
       supervisor(GlcsrdWeb.Endpoint, []),
       # Start your own worker by calling: Glcsrd.Worker.start_link(arg1, arg2, arg3)
       # worker(Glcsrd.Worker, [arg1, arg2, arg3]),
-      worker(Glcsrd.Readings.Server, [] )
+      worker(Glcsrd.Readings.Server, [g_config.val] )
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -3,20 +3,21 @@ defmodule Glcsrd.Readings.Impl do
 
   end
 
-  def load do
+  def load(dir) do
     #readings = :ets.new(:readings, [:set])
-    glucose_readings = read_files("../data/*_glucose.csv")
-    weight_readings = read_files("../data/*_weight.csv")
-    IO.inspect(glucose_readings, label: "glucose_readings")
-    IO.inspect(weight_readings, label: "weight_readings")
-    r_diff = glucose_readings -- weight_readings
-    IO.inspect(r_diff, label: "diff")
+    glucose_readings = read_files("#{dir}*_glucose.csv")
+    weight_readings = read_files("#{dir}*_weight.csv")
+    # IO.inspect(glucose_readings, label: "glucose_readings")
+    # IO.inspect(weight_readings, label: "weight_readings")
+    # r_diff = glucose_readings -- weight_readings
+    # IO.inspect(r_diff, label: "diff")
     
     # fill in missing weight dates with nil to sync indexes of both datasets
     weight_readings = Enum.map(glucose_readings, &match_lists(&1,
       weight_readings))
 
-    { glucose_readings, weight_readings }
+    %{ dir: dir, readings: %{ glucose: glucose_readings, weight:
+        weight_readings}}
   end
 
   
